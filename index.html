@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Project Kampung</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=beranda-warga.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ✅ PANGGIL CSS KHUSUS BERANDA -->
+    <link rel="stylesheet" href="/project-kampung/assets/css/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- ✅ PANGGIL JS UTAMA (Fungsi Menu & Animasi) -->
+    <script src="/project-kampung/assets/js/game.js"></script>
+</head>
+<body onload="animasiLogo()">
+
+    <!-- ✅ WAJIB DI ATAS SEKALI - LAPISAN GELAP -->
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <!-- ✅ MENU SAMPING - ID HARUS SAMA: menuSamping -->
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu-btn" onclick="tutupMenu()" style="text-align:right; padding:0.8rem; font-size:1.3rem; color:#F59E0B; cursor:pointer;">
+            <i class="fa fa-times"></i>
+        </div>
+        <div style="padding:0 1rem 1rem 1rem; border-bottom:1px solid rgba(245,158,11,0.2); margin-bottom:1rem;">
+            <h3 style="color:#F59E0B; margin:0;">KAMPOENG AING</h3>
+        </div>
+        <a href="index.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-home"></i> Beranda</a>
+        <a href="tentang.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-info-circle"></i> Tentang</a>
+        <a href="berita.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-newspaper-o"></i> Berita</a>
+        <a href="kegiatan.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-calendar"></i> Kegiatan</a>
+        <a href="galeri.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-picture-o"></i> Galeri</a>
+        <a href="kontak.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#CBD5E1; text-decoration:none; border-radius:6px; margin-bottom:0.3rem;"><i class="fa fa-phone"></i> Kontak</a>
+        <div style="border-top:1px solid rgba(255,255,255,0.1); margin-top:1rem; padding-top:1rem;"></div>
+        <a href="login.html" class="nav-btn" style="display:block; padding:0.8rem 1rem; color:#EF4444; text-decoration:none; border-radius:6px; margin-top:0.5rem;"><i class="fa fa-sign-in"></i> Masuk Akun</a>
+    </div>
+
+    <!-- ✅ HEADER & TOMBOL GARIS TIGA -->
+    <header class="header" style="display:flex; align-items:center; justify-content:space-between; padding:1rem 1.5rem; background:rgba(31,41,55,0.4); backdrop-filter:blur(10px); border-bottom:1px solid var(--warna-batas); position:sticky; top:0; z-index:10000;">
+        <!-- ✅ TOMBOL GARIS TIGA - DIPERKUAT AGAR BISA DIKLIK -->
+        <div class="tombol-menu" onclick="bukaMenu()" style="font-size:1.3rem; color:#F59E0B; cursor:pointer; padding:0.5rem; position:relative; z-index:10001;">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="logo" id="animasiLogo" style="font-size:1.3rem; font-weight:700; color:#F59E0B; letter-spacing:1px;"></div>
+        <div></div> <!-- Kosong sebagai penyeimbang -->
+    </header>
+    <!-- ✅ KONTEN UTAMA -->
+    <main class="main-container">
+        <div class="bagian-kiri">
+            <h1 class="judul-besar">KAMPOENG AING</h1>
+            <p class="deskripsi">
+                Tempat berkumpul, berbagi, dan saling menjaga kebersamaan, kenyamanan, layanan, dan kehanganatan dalam satu genggaman.
+            </p>
+            <a href="login.html" style="text-decoration: none;">
+                <button class="tombol-utama">Jelajahi Kampoeng</button>
+            </a>
+        </div>
+
+        <div class="bagian-kanan">
+            <div class="kotak-fitur">
+                <h3 class="judul-fitur"><i class="fa fa-list-ul"></i> Daftar</h3>
+                <ul class="daftar-fitur">
+                    <li class="item-fitur"><i class="fa fa-bell"></i> Pengumuman & Berita</li>
+                    <li class="item-fitur"><i class="fa fa-map-marker"></i> Peta & Lokasi Penting</li>
+                    <li class="item-fitur"><i class="fa fa-picture-o"></i> Galeri Kegiatan</li>
+                    <li class="item-fitur">
+                        <i class="fa fa-comment"></i> Masukan & Saran
+                        <div class="form-saran">
+                            <input type="text" id="namaPengirim" placeholder="Nama Anda">
+                            <textarea id="isiSaran" placeholder="Tulis pesan..."></textarea>
+                            <button onclick="kirimSaran()">Kirim</button>
+                            <div id="statusSaran"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+<script>
+    // ✅ FUNGSI KIRIM SARAN (Tersimpan ke Admin)
+    function kirimSaran() {
+        const nama = document.getElementById('namaPengirim').value.trim();
+        const isi = document.getElementById('isiSaran').value.trim();
+        const status = document.getElementById('statusSaran');
+
+        if(!nama || !isi) {
+            status.innerHTML = "<span style='color:red; font-size:0.7rem;'>Lengkapi data!</span>";
+            return;
+        }
+
+        let daftarPesan = JSON.parse(localStorage.getItem('kotakSaranAdmin')) || [];
+        daftarPesan.push({ nama, pesan: isi, waktu: new Date().toLocaleString('id-ID') });
+        localStorage.setItem('kotakSaranAdmin', JSON.stringify(daftarPesan));
+
+        status.innerHTML = "<span style='color:green; font-size:0.7rem;'>✅ Terkirim!</span>";
+        document.getElementById('namaPengirim').value = "";
+        document.getElementById('isiSaran').value = "";
+    }
+
+    // ✅ FUNGSI MENU SAMPING (CADANGAN JIKA ADA MASALAH DI game.js)
+    function bukaMenu() {
+        document.getElementById("menuSamping").classList.add("buka");
+        document.getElementById("lapisanGelap").classList.add("aktif");
+    }
+    function tutupMenu() {
+        document.getElementById("menuSamping").classList.remove("buka");
+        document.getElementById("lapisanGelap").classList.remove("aktif");
+    }
+</script>
+
+</body>
+</html>
