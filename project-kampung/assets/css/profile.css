@@ -1,0 +1,278 @@
+/* ==============================================
+   VARIABEL DASAR (SAMA DENGAN HALAMAN LAIN)
+   ============================================== */
+:root {
+    --warna-utama: #16A34A;
+    --warna-merah: #DC2626;
+    --warna-kuning: #F59E0B;
+    --warna-abu-gelap: #1F2937;
+    --warna-abu-terang: #374151;
+    --warna-teks: #F3F4F6;
+    --warna-batas: #4B5563;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #111827;
+    color: var(--warna-teks);
+    line-height: 1.6;
+}
+
+/* ==============================================
+   MENU SAMPING
+   ============================================== */
+.lapisan-gelap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 99;
+    display: none;
+}
+.lapisan-gelap.aktif { display: block; }
+
+.menu-samping {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--warna-abu-gelap);
+    border-right: 1px solid var(--warna-batas);
+    z-index: 100;
+    transition: 0.3s ease;
+    padding: 1rem;
+}
+.menu-samping.buka { left: 0; }
+
+.tutup-menu {
+    text-align: right;
+    font-size: 1.5rem;
+    color: #9CA3AF;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.nav-menu a {
+    display: block;
+    color: var(--warna-teks);
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.nav-menu a.aktif, .nav-menu a:hover {
+    background: var(--warna-utama);
+    color: white;
+}
+
+/* ==============================================
+   HEADER
+   ============================================== */
+.header {
+    background: var(--warna-abu-gelap);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--warna-batas);
+    position: sticky;
+    top: 0;
+    z-index: 98;
+}
+
+.tombol-menu {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--warna-teks);
+}
+
+.logo {
+    font-size: 1.3rem;
+    color: var(--warna-teks);
+}
+.logo span { color: var(--warna-kuning); }
+
+.header-right { display: flex; gap: 1rem; align-items: center; }
+.profil-btn, .btn-keluar {
+    color: var(--warna-teks);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+.profil-btn:hover { background: var(--warna-abu-terang); }
+.btn-keluar { background: var(--warna-merah); }
+.btn-keluar:hover { background: #B91C1C; }
+
+/* ==============================================
+   KONTEN UTAMA & KARTU PROFIL
+   ============================================== */
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.kartu-profil {
+    background: var(--warna-abu-gelap);
+    border: 1px solid var(--warna-batas);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    margin: 3rem auto;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* ==============================================
+   BAGIAN FOTO PROFIL
+   ============================================== */
+.wadah-foto {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.foto-profil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--warna-utama);
+    background: var(--warna-abu-terang);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: var(--warna-utama);
+    overflow: hidden;
+}
+
+.tombol-ganti-foto {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: var(--warna-utama);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.tombol-ganti-foto:hover {
+    background: #15803D;
+}
+
+/* ==============================================
+   PANEL PILIHAN FOTO / IKON
+   ============================================== */
+.pilihan-foto {
+    background: var(--warna-abu-terang);
+    border: 1px solid var(--warna-batas);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: none;
+}
+.pilihan-foto.aktif { display: block; }
+
+.judul-pilihan {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #E5E7EB;
+}
+
+.grid-ikon {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 1rem 0;
+}
+
+.ikon-pilihan {
+    font-size: 2rem;
+    color: var(--warna-teks);
+    background: var(--warna-abu-gelap);
+    border: 2px solid var(--warna-batas);
+    border-radius: 8px;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.ikon-pilihan:hover, .ikon-pilihan.terpilih {
+    border-color: var(--warna-utama);
+    color: var(--warna-utama);
+    transform: scale(1.05);
+}
+
+.input-file { display: none; }
+
+.btn-unggah, .btn-reset {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0.3rem;
+}
+.btn-unggah { background: var(--warna-utama); color: white; }
+.btn-reset { background: var(--warna-merah); color: white; }
+
+/* ==============================================
+   INFORMASI PENGGUNA
+   ============================================== */
+.nama-user { 
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin-bottom: 0.5rem; 
+    color: #F9FAFB; 
+}
+
+.peran-user { 
+    background: var(--warna-utama); 
+    color: white; 
+    padding: 0.3rem 1rem; 
+    border-radius: 20px; 
+    font-size: 0.8rem; 
+    font-weight:bold; 
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.garis { 
+    border: none;
+    border-top: 1px solid var(--warna-batas); 
+    margin:1.5rem 0; 
+}
+
+.keterangan { 
+    color:#9CA3AF; 
+    font-size: 0.95rem; 
+}
+
+/* ==============================================
+   TAMPILAN HP / LAYAR KECIL
+   ============================================== */
+@media (max-width: 480px) {
+    .kartu-profil { padding: 1.5rem 1rem; }
+    .wadah-foto { width: 120px; height: 120px; }
+    .foto-profil { font-size: 4rem; }
+}

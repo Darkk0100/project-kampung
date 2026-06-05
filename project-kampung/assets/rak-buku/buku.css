@@ -1,0 +1,270 @@
+/* === DASAR & RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #000208, #000000);
+    min-height: 100vh;
+    color: #f8fafc;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* === LAPISAN GELAP (BACKDROP MENU) === */
+.lapisan-gelap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.lapisan-gelap.aktif {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* === MENU SAMPING === */
+.menu-samping {
+   position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: rgba(31, 41, 55, 0.95);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(245, 158, 11, 0.2);
+    z-index: 9999 !important; /* 👈 HARUS 9999 (LEBIH KECIL DARI 10000) */
+    transition: left 0.3s ease;
+    padding: 1.5rem;
+    box-shadow: 4px 0 25px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    
+    /* 👇 TAMBAH INI SUPAYA MENU TIDAK NEMPEL KE ATAS SAMPAI HABIS */
+    margin-top: 0 !important;
+    padding-top: 80px !important; /* 👈 JARAK DARI ATAS, SESUAI TINGGI HEADER */
+}
+.menu-samping.buka {
+    left: 0;
+}
+
+.tutup-menu-btn {
+    position: absolute !important;
+    text-align: right;
+    font-size: 1.4rem;
+    color: var(--warna-utama);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 0.5rem;
+}
+.tutup-menu-btn i {
+    font-size: 1.5rem;
+    color: #f87171;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.tutup-menu-btn i:hover {
+    transform: rotate(90deg);
+}
+
+.judul-menu {
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.judul-menu h3 {
+    color: #f59e0b;
+    font-size: 1.2rem;
+}
+.judul-menu p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.daftar-menu .nav-btn {
+    display: block;
+    padding: 0.8rem 1rem;
+    margin: 0.3rem 0;
+    border-radius: 8px;
+    color: #e2e8f0;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+.daftar-menu .nav-btn i {
+    margin-right: 0.7rem;
+    width: 18px;
+    text-align: center;
+}
+.daftar-menu .nav-btn:hover,
+.daftar-menu .nav-btn.aktif {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border-left: 3px solid #f59e0b;
+}
+
+.garis-pemisah {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 1rem 0;
+}
+
+.masuk-akun {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #6ee7b7 !important;
+}
+.masuk-akun:hover {
+    background: rgba(16, 185, 129, 0.2) !important;
+    color: #d1fae5 !important;
+}
+
+/* === HEADER (DIPERBAIKI TOTAL - TIDAK ADA YANG MENUTUPI) === */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(1, 19, 48, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000 !important; /* 👈 KUNCI UTAMA: Paling atas, tidak ada yang bisa menutupi */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.tombol-menu i, .tombol-kembali i {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #ffffff;
+    transition: color 0.2s;
+}
+.tombol-menu i:hover, .tombol-kembali i:hover {
+    color: #fbbf24;
+}
+
+.logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fef08a;
+    letter-spacing: 0.5px;
+}
+
+/* === KONTEN UTAMA === */
+.container-buku {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.judul-materi {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+}
+.judul-materi h1 {
+    font-size: 1.8rem;
+    color: #fbbf24;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+}
+.judul-materi p {
+    color: #cbd5e1;
+    font-size: 1rem;
+}
+
+.kotak-isi {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.1);
+    
+    /* 👈 GAYA DASAR UNTUK SEMUA MATERI */
+    line-height: 1.8 !important;
+    font-size: 1rem !important;
+    color: #e5e7eb !important;
+}
+.kotak-isi p {
+    text-align: justify !important;
+    margin: 0.5rem 0 !important;
+}
+
+/* === GAYA BAGIAN MATERI (BISA DIPAKAI SEMUA HALAMAN) === */
+
+/* Judul Besar */
+.judul-besar {
+    color: #f59e0b;
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+    font-weight: bold;
+}
+
+/* Judul Menengah */
+.judul-kecil {
+    color: #fef3c7;
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    font-weight: 600;
+}
+
+/* Judul Setiap Bab / Item */
+.item-judul {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fecaca;
+    font-weight: bold;
+    font-size: 1.05rem;
+    padding: 0.8rem 1rem;
+    margin: 1rem 0 0.3rem;
+    border-radius: 8px;
+    border-left: 4px solid #ef4444;
+}
+
+/* Poin Penting / Rahasia / Fakta */
+.poin-rahasia {
+    background: rgba(245, 158, 11, 0.1);
+    color: #fcd34d;
+    font-style: italic;
+    padding: 0.7rem 1rem;
+    margin: 0 0 1rem 1.2rem;
+    border-radius: 0 0 8px 8px;
+    border-left: 2px dashed #f59e0b;
+    line-height: 1.6;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .judul-materi h1 {
+        font-size: 1.4rem;
+    }
+    .kotak-isi {
+        padding: 1.2rem;
+    }
+    .logo {
+        font-size: 1rem;
+    }
+}

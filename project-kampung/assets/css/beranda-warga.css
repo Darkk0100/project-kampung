@@ -1,0 +1,88 @@
+:root {
+    --warna-utama: #16A34A;
+    --warna-merah: #DC2626;
+    --warna-kuning: #F59E0B;
+    --warna-abu-gelap: #1F2937;
+    --warna-abu-terang: #374151;
+    --warna-teks: #F3F4F6;
+    --warna-batas: #4B5563;
+}
+* {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+body {background-color: #111827; color: var(--warna-teks); line-height: 1.6;}
+
+/* ==============================================
+   MENU & HEADER (SAMA DENGAN HALAMAN LAIN)
+   ============================================== */
+.lapisan-gelap {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 99; display: none;}
+.lapisan-gelap.aktif {display: block;}
+
+.menu-samping {position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background: var(--warna-abu-gelap); border-right: 1px solid var(--warna-batas); z-index: 100; transition: 0.3s ease; padding: 1rem;}
+.menu-samping.buka {left: 0;}
+
+.tutup-menu {text-align: right; font-size: 1.5rem; color: #9CA3AF; cursor: pointer; margin-bottom: 1rem;}
+.nav-menu a {display: block; color: var(--warna-teks); padding: 0.8rem 1rem; margin-bottom: 0.5rem; border-radius: 6px; text-decoration: none; transition: 0.2s;}
+.nav-menu a.aktif, .nav-menu a:hover {background: var(--warna-utama); color: white;}
+
+.header {background: var(--warna-abu-gelap); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--warna-batas); position: sticky; top: 0; z-index: 98;}
+.tombol-menu {font-size: 1.5rem; cursor: pointer; color: var(--warna-teks);}
+.logo {font-size: 1.3rem; color: var(--warna-teks);}
+.logo span {color: var(--warna-kuning);}
+.header-right a {color: var(--warna-teks); text-decoration: none; padding: 0.5rem; border-radius: 6px;}
+
+/* ==============================================
+   KONTEN UTAMA
+   ============================================== */
+.main-container {max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem;}
+.konten-bagian {display: none; margin-bottom: 3rem;}
+.konten-bagian.aktif {display: block;}
+
+.judul-bagian {color: var(--warna-kuning); margin-bottom: 0.5rem; font-size: 1.4rem;}
+.keterangan-bagian {color: #9CA3AF; margin-bottom: 1.5rem; font-size: 0.9rem;}
+.teks-kosong {color: #6B7280; font-style: italic; text-align: center; padding: 2rem;}
+
+/* ==============================================
+   KOTAK ISI & CHAT
+   ============================================== */
+.kotak-daftar {background: var(--warna-abu-gelap); border: 1px solid var(--warna-batas); border-radius: 8px; padding: 1.5rem; min-height: 200px;}
+.kotak-kirim {background: var(--warna-abu-terang); border: 1px solid var(--warna-batas); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;}
+
+textarea, input {width: 100%; padding: 0.8rem; margin-bottom: 0.5rem; background: var(--warna-abu-gelap); border: 1px solid var(--warna-batas); border-radius: 6px; color: white; font-size: 0.95rem;}
+textarea {resize: vertical; min-height: 80px;}
+
+.btn-kirim {background: var(--warna-utama); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.2s;}
+.btn-kirim:hover {background: #15803D;}
+
+.kartu-pesan {background: var(--warna-abu-terang); border-radius: 6px; padding: 0.8rem; margin-bottom: 0.5rem;}
+.kartu-pesan small {color: #9CA3AF; float: right; font-size: 0.8rem;}
+
+/* ==============================================
+   GALERI STORY
+   ============================================== */
+.grid-galeri {display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem;}
+.kartu-foto {background: var(--warna-abu-gelap); border-radius: 8px; overflow: hidden; border: 1px solid var(--warna-batas);}
+.kartu-foto img {width: 100%; height: 120px; object-fit: cover;}
+.info-foto {padding: 0.5rem; font-size: 0.85rem;}
+
+.item-antrean {padding: 0.5rem 0; border-bottom: 1px solid #444; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;}
+.btn-setuju {background: #16A34A; color: white; border: none; padding: 0.2rem 0.6rem; border-radius: 4px; margin: 0 0.2rem; cursor: pointer;}
+.btn-tolak {background: #DC2626; color: white; border: none; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer;}
+
+/* ==============================================
+   PERINGKAT / GAME
+   ============================================== */
+.kotak-peringkat {background: var(--warna-abu-gelap); border: 1px solid var(--warna-batas); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;}
+.baris-peringkat {display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1rem; border-bottom: 1px solid var(--warna-batas); border-radius: 6px; margin-bottom: 0.3rem;}
+.baris-peringkat.teratas {background: rgba(245, 158, 11, 0.15); border: 1px solid var(--warna-kuning); font-weight: bold; font-size: 1.1rem;}
+.nomor {font-weight: bold; min-width: 30px;}
+.poin {color: var(--warna-utama); font-weight: bold;}
+
+.info-poin {padding: 1rem; background: rgba(22, 163, 74, 0.1); border-radius: 8px; border: 1px solid rgba(22, 163, 74, 0.2);}
+.info-poin h3 {color: var(--warna-utama); margin-bottom: 0.5rem;}
+
+/* ==============================================
+   RESPONSIVE HP
+   ============================================== */
+@media (max-width: 600px) {
+    .grid-galeri {grid-template-columns: repeat(2, 1fr);}
+    .item-antrean {flex-direction: column; align-items: flex-start;}
+}

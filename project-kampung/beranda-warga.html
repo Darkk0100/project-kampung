@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda Warga - Kampoeng Aing</title>
+    <link rel="stylesheet" href="assets/css/beranda-warga.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <!-- MENU SAMPING -->
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="beranda-warga.html" class="nav-btn aktif"><i class="fa fa-home"></i> Beranda Warga</a>
+            <a href="profil.html" class="nav-btn"><i class="fa fa-user-circle"></i> Profil Saya</a>
+            <a href="#jadwal" class="nav-btn" onclick="bukaBagian('jadwal')"><i class="fa fa-calendar"></i> Jadwal Kegiatan</a>
+            <a href="#info" class="nav-btn" onclick="bukaBagian('info')"><i class="fa fa-exclamation-circle"></i> Info Penting</a>
+            <a href="#berita" class="nav-btn" onclick="bukaBagian('berita')"><i class="fa fa-newspaper-o"></i> Berita Desa</a>
+            <a href="rak-buku.html" class="nav-btn" onclick="bukaBagian('buku')"><i class="fa fa-book"></i> Rak Buku Digital</a>
+            <a href="#forum" class="nav-btn" onclick="bukaBagian('forum')"><i class="fa fa-comments"></i> Forum Diskusi</a>
+            <a href="#story" class="nav-btn" onclick="bukaBagian('story')"><i class="fa fa-image"></i> Story Warga</a>
+            <a href="game.html" class="nav-btn" onclick="bukaBagian('game')"><i class="fa fa-gamepad"></i> Papan Peringkat</a>
+            <a href="admin.html" class="nav-btn" id="linkAdmin" style="color:red; font-weight:bold; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; display:none;">
+                <i class="fa fa-shield"></i> KELOLA SEMUA (ADMIN)
+            </a>
+            <a href="login.html" class="nav-btn" onclick="keluarAkun()"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="namaAplikasi"></span></h1>
+        <div class="header-right">
+            <a href="profil.html" class="profil-btn"><i class="fa fa-user-circle"></i></a>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- BAGIAN 1: JADWAL KEGIATAN (ISI DARI ADMIN) -->
+        <section id="bagian-jadwal" class="konten-bagian aktif">
+            <h2 class="judul-bagian"><i class="fa fa-calendar"></i> Jadwal & Kegiatan Desa</h2>
+            <p class="keterangan-bagian">Informasi ini dikelola langsung oleh Pengurus Desa.</p>
+            <div class="kotak-daftar" id="isiJadwal">
+                <p class="teks-kosong">Belum ada jadwal terbaru.</p>
+            </div>
+        </section>
+
+        <!-- BAGIAN 2: INFO PENTING (ISI DARI ADMIN) -->
+        <section id="bagian-info" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-exclamation-circle"></i> Info & Pengumuman Penting</h2>
+            <div class="kotak-daftar" id="isiInfo"></div>
+        </section>
+
+        <!-- BAGIAN 3: BERITA DESA (ISI DARI ADMIN) -->
+        <section id="bagian-berita" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-newspaper-o"></i> Berita Terbaru</h2>
+            <div class="kotak-daftar" id="isiBerita"></div>
+        </section>
+
+        <!-- BAGIAN 4: RAK BUKU / DOKUMEN (ISI DARI ADMIN) -->
+        <section id="bagian-buku" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-book"></i> Rak Buku & Dokumen</h2>
+            <div class="kotak-daftar" id="isiBuku"></div>
+        </section>
+
+        <!-- BAGIAN 5: FORUM DISKUSI WARGA -->
+        <section id="bagian-forum" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-comments"></i> Ruang Diskusi Warga</h2>
+            <p class="keterangan-bagian">Semua warga dapat berdiskusi. Admin mengawasi dan mengelola.</p>
+            
+            <div class="kotak-kirim">
+                <textarea id="inputPesan" placeholder="Tulis pesan atau pertanyaan di sini..."></textarea>
+                <button class="btn-kirim" onclick="kirimPesan()">📤 Kirim Pesan (+5 Poin)</button>
+            </div>
+
+            <div class="kotak-daftar chat-wadah" id="wadahChat"></div>
+        </section>
+
+        <!-- BAGIAN 6: STORY / UPLOAD FOTO (PERLU PERSETUJUAN) -->
+        <section id="bagian-story" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-image"></i> Story & Kegiatan Warga</h2>
+            <p class="keterangan-bagian">Unggah foto kegiatanmu. Foto akan muncul setelah disetujui Admin.</p>
+
+            <div class="kotak-kirim">
+                <input type="file" id="inputStory" accept="image/*" class="input-file">
+                <input type="text" id="judulStory" placeholder="Judul / Keterangan singkat...">
+                <button class="btn-kirim" onclick="kirimStory()">📤 Ajukan Unggahan</button>
+            </div>
+
+            <!-- GALERI YANG SUDAH DISETUJUI -->
+            <div class="grid-galeri" id="galeriStory"></div>
+
+            <!-- ANTREAN PERSETUJUAN (HANYA TAMPAK ADMIN) -->
+            <div id="kotakAntrean" style="display:none; margin-top:2rem; border:1px solid #f59e0b; padding:1rem; border-radius:8px; background:rgba(245, 158, 11, 0.05);">
+                <h4 style="color:#f59e0b; margin-bottom:1rem;">⚠️ Menunggu Persetujuan Admin</h4>
+                <div id="daftarAntrean"></div>
+            </div>
+        </section>
+
+        <!-- BAGIAN 7: GAME & PERINGKAT POIN -->
+        <section id="bagian-game" class="konten-bagian">
+            <h2 class="judul-bagian"><i class="fa fa-gamepad"></i> Papan Peringkat Warga</h2>
+            <p class="keterangan-bagian">Poin didapat dari aktifitas & kontribusi. Menampilkan 10 Warga Teraktif.</p>
+            
+            <div class="kotak-peringkat">
+                <div class="papan-skor" id="papanSkor"></div>
+            </div>
+
+            <div class="info-poin">
+                <h3>✅ Cara Mendapatkan Poin:</h3>
+                <p>✔ Berdiskusi di Forum +5 Poin | ✔ Unggah Kegiatan (Disetujui) +20 Poin | ✔ Partisipasi Kegiatan +10 Poin</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function bukaMenu() { document.getElementById("menuSamping").classList.add("buka"); document.getElementById("lapisanGelap").classList.add("aktif"); }
+        function tutupMenu() { document.getElementById("menuSamping").classList.remove("buka"); document.getElementById("lapisanGelap").classList.remove("aktif"); }
+
+        window.onload = function() {
+            // Cek Login
+            if(!localStorage.getItem('sudahLogin')) { window.location.href = "login.html"; return; }
+            
+            // Tampilkan Menu & Fitur Khusus Admin
+            if(localStorage.getItem('peranPengguna') === 'admin') {
+                document.getElementById('linkAdmin').style.display = 'flex';
+                document.getElementById('kotakAntrean').style.display = 'block'; // Admin lihat antrean
+            }
+
+            // Judul Aplikasi
+            document.getElementById('namaAplikasi').innerText = localStorage.getItem('namaAplikasi') || "KAMPOENG AING";
+
+            // MUAT DATA YANG DIATUR DARI HALAMAN ADMIN
+            document.getElementById('isiJadwal').innerHTML = localStorage.getItem('kontenJadwal') || "<p class='teks-kosong'>Belum ada jadwal.</p>";
+            document.getElementById('isiInfo').innerHTML = localStorage.getItem('kontenInfo') || "<p class='teks-kosong'>Belum ada info penting.</p>";
+            document.getElementById('isiBerita').innerHTML = localStorage.getItem('kontenBerita') || "<p class='teks-kosong'>Belum ada berita.</p>";
+            document.getElementById('isiBuku').innerHTML = localStorage.getItem('kontenBuku') || "<p class='teks-kosong'>Belum ada dokumen.</p>";
+
+            // MUAT DATA INTERAKTIF
+            muatChat();
+            muatStory();
+            muatPeringkat();
+        };
+
+        // GANTI BAGIAN MENU
+        function bukaBagian(nama) {
+            document.querySelectorAll('.konten-bagian').forEach(b => b.classList.remove('aktif'));
+            document.getElementById('bagian-' + nama).classList.add('aktif');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('aktif'));
+            event.target.closest('.nav-btn').classList.add('aktif');
+        }
+
+        // ---FUNGSI FORUM CHAT---
+        function kirimPesan() {
+            const isi = document.getElementById('inputPesan').value.trim();
+            if(!isi) return;
+            const nama = localStorage.getItem('namaPengguna');
+            const waktu = new Date().toLocaleString();
+
+            let daftar = JSON.parse(localStorage.getItem('dataForumChat')) || [];
+            daftar.push({nama: nama, isi: isi, waktu: waktu});
+            localStorage.setItem('dataForumChat', JSON.stringify(daftar));
+            
+            document.getElementById('inputPesan').value = "";
+            muatChat();
+            tambahPoin(5); // Dapat poin
+        }
+        function muatChat() {
+            const daftar = JSON.parse(localStorage.getItem('dataForumChat')) || [];
+            const wadah = document.getElementById('wadahChat'); wadah.innerHTML = "";
+            daftar.reverse().forEach(pesan => {
+                wadah.innerHTML += `
+                <div class="kartu-pesan">
+                    <strong>${pesan.nama}</strong> <small>${pesan.waktu}</small>
+                    <p>${pesan.isi}</p>
+                </div>`;
+            });
+        }
+
+        // ---FUNGSI STORY / UPLOAD (PERLU PERSETUJUAN)---
+        function kirimStory() {
+            const file = document.getElementById('inputStory').files[0];
+            const judul = document.getElementById('judulStory').value || "Tanpa Judul";
+            if(!file) return alert("Pilih foto terlebih dahulu!");
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let antrean = JSON.parse(localStorage.getItem('antreanStory')) || [];
+                antrean.push({
+                    nama: localStorage.getItem('namaPengguna'),
+                    judul: judul,
+                    gambar: e.target.result,
+                    status: 'menunggu'
+                });
+                localStorage.setItem('antreanStory', JSON.stringify(antrean));
+                alert("✅ Foto berhasil dikirim! Menunggu persetujuan Admin.");
+                document.getElementById('inputStory').value = "";
+                document.getElementById('judulStory').value = "";
+                muatStory();
+            }
+            reader.readAsDataURL(file);
+        }
+
+        // ADMIN: SETUJU / TOLAK
+        function setujuiStory(urutan) {
+            let antrean = JSON.parse(localStorage.getItem('antreanStory')) || [];
+            let galeri = JSON.parse(localStorage.getItem('galeriStory')) || [];
+            
+            const item = antrean[urutan];
+            galeri.push(item); // Pindah ke galeri utama
+            antrean.splice(urutan, 1); // Hapus dari antrean
+            
+            localStorage.setItem('antreanStory', JSON.stringify(antrean));
+            localStorage.setItem('galeriStory', JSON.stringify(galeri));
+            
+            tambahPoin(20, item.nama); // Kasih poin ke pengirim
+            muatStory();
+        }
+        function tolakStory(urutan) {
+            let antrean = JSON.parse(localStorage.getItem('antreanStory')) || [];
+            antrean.splice(urutan, 1);
+            localStorage.setItem('antreanStory', JSON.stringify(antrean));
+            muatStory();
+        }
+
+        function muatStory() {
+            // Tampilkan yang SUDAH DISETUJUI
+            const galeri = JSON.parse(localStorage.getItem('galeriStory')) || [];
+            const wadahGaleri = document.getElementById('galeriStory'); wadahGaleri.innerHTML = "";
+            galeri.forEach(item => {
+                wadahGaleri.innerHTML += `
+                <div class="kartu-foto">
+                    <img src="${item.gambar}">
+                    <div class="info-foto">
+                        <strong>${item.judul}</strong>
+                        <p>Oleh: ${item.nama}</p>
+                    </div>
+                </div>`;
+            });
+
+            // Tampilkan ANTREAN (HANYA ADMIN)
+            const antrean = JSON.parse(localStorage.getItem('antreanStory')) || [];
+            const wadahAntrean = document.getElementById('daftarAntrean'); wadahAntrean.innerHTML = "";
+            antrean.forEach((item, i) => {
+                wadahAntrean.innerHTML += `
+                <div class="item-antrean">
+                    <img src="${item.gambar}" style="height:50px; vertical-align:middle; border-radius:4px;">
+                    <span>${item.nama}: ${item.judul}</span>
+                    <div>
+                        <button class="btn-setuju" onclick="setujuiStory(${i})">✅ Setuju</button>
+                        <button class="btn-tolak" onclick="tolakStory(${i})">❌ Tolak</button>
+                    </div>
+                </div>`;
+            });
+        }
+
+        // ---SISTEM POIN & PERINGKAT 10 BESAR---
+        function tambahPoin(jumlah, namaPengguna = null) {
+            const nama = namaPengguna || localStorage.getItem('namaPengguna');
+            if(!nama) return;
+
+            let dataPoin = JSON.parse(localStorage.getItem('dataPeringkat')) || [];
+            const cari = dataPoin.find(d => d.nama === nama);
+            
+            if(cari) cari.poin += jumlah;
+            else dataPoin.push({nama: nama, poin: jumlah});
+
+            // Urutkan dari poin terbesar
+            dataPoin.sort((a,b) => b.poin - a.poin);
+            localStorage.setItem('dataPeringkat', JSON.stringify(dataPoin));
+            muatPeringkat();
+        }
+
+        function muatPeringkat() {
+            const daftar = JSON.parse(localStorage.getItem('dataPeringkat')) || [];
+            const wadah = document.getElementById('papanSkor'); wadah.innerHTML = "";
+            
+            // Ambil HANYA 10 TERATAS
+            const sepuluhBesar = daftar.slice(0, 10);
+            
+            sepuluhBesar.forEach((org, i) => {
+                let medali = '';
+                if(i===0) medali = '🥇';
+                if(i===1) medali = '🥈';
+                if(i===2) medali = '🥉';
+
+                wadah.innerHTML += `
+                <div class="baris-peringkat ${i<3?'teratas':''}">
+                    <span class="nomor">${medali || (i+1)}</span>
+                    <span class="nama">${org.nama}</span>
+                    <span class="poin">${org.poin} Poin</span>
+                </div>`;
+            });
+        }
+
+        // ---KELUAR AKUN---
+        function keluarAkun() { 
+            localStorage.clear(); 
+            window.location.href = "login.html"; 
+        }
+    </script>
+</body>
+</html>

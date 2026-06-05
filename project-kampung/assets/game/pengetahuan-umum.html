@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengetahuan Umum - Kampoeng Aing</title>
+    <link rel="stylesheet" href="/assets/css/game.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/assets/js/game.js"></script>
+</head>
+<body onload="muatSoalPU()">
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="/./beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="#" class="nav-btn"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="#" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="#" class="nav-btn"><i class="fa fa-phone"></i> Kontak</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="animasiLogo"></span></h1>
+        <div class="header-right">
+            <a href="/./profil.html" class="profil-btn"><i class="fa fa-user-circle"></i> <span>Profil Saya</span></a>
+            <a href="/./index.html" class="btn-keluar"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="content" style="max-width: 650px; margin: 0 auto;">
+            <div class="content-card">
+                <a href="/./game.html" class="tombol-kembali"><i class="fa fa-arrow-left"></i> Kembali ke Pilihan Game</a>
+
+                <div id="halamanAwal">
+                    <div class="game-header">
+                        <div class="game-icon"><i class="fa fa-globe"></i></div>
+                        <h1 class="judul-game">Pengetahuan Umum</h1>
+                        <p class="deskripsi-game">Sejarah, geografi, dan wawasan luas seputar dunia.</p>
+                    </div>
+                    <button class="btn-mulai" onclick="bukaLevel()"><i class="fa fa-play"></i> MULAI BERMAIN</button>
+                    <div class="papan-peringkat" id="papanPeringkat">
+                        <h2 class="judul-papan"><i class="fa fa-list-ol"></i> Papan Peringkat Pengetahuan Umum</h2>
+                        <ul class="daftar-peringkat"></ul>
+                    </div>
+                </div>
+
+                <div class="area-level" id="areaLevel">
+                    <h2 class="judul-game" style="text-align:center; margin-bottom:1rem;">Pilih Level</h2>
+                    <div class="daftar-level">
+                        <div class="kartu-level" id="level1" onclick="bukaSoal(1)"><div class="nomor-level">1</div><small>Dasar</small></div>
+                        <div class="kartu-level terkunci" id="level2" onclick="bukaSoal(2)"><div class="nomor-level">2</div><small>Menengah</small></div>
+                        <div class="kartu-level terkunci" id="level3" onclick="bukaSoal(3)"><div class="nomor-level">3</div><small>Sulit</small></div>
+                        <div class="kartu-level terkunci" id="level4" onclick="bukaSoal(4)"><div class="nomor-level">4</div><small>Ahli</small></div>
+                    </div>
+                </div>
+
+                <div class="area-soal" id="areaSoal">
+                    <div class="kotak-soal">
+                        <h3 id="judulSoal"></h3>
+                        <div class="teks-soal" id="teksSoal"></div>
+                        <div class="pilihan-jawaban" id="pilihanJawaban">
+                            <div class="pilihan" onclick="cekJawaban(this, 1)">A. <span id="pilA"></span></div>
+                            <div class="pilihan" onclick="cekJawaban(this, 2)">B. <span id="pilB"></span></div>
+                            <div class="pilihan" onclick="cekJawaban(this, 3)">C. <span id="pilC"></span></div>
+                            <div class="pilihan" onclick="cekJawaban(this, 4)">D. <span id="pilD"></span></div>
+                        </div>
+                        <div class="pesan-hasil" id="pesanHasil"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script>
+function muatSoalPU() {
+    const dataSoal = [
+        { soal: "Ibu kota negara Indonesia adalah...", pilihan: ["Jakarta", "Bandung", "Surabaya", "Yogyakarta"], jawaban: 1 },
+        { soal: "Pulau terbesar di Indonesia adalah...", pilihan: ["Jawa", "Sumatra", "Kalimantan", "Papua"], jawaban: 4 },
+        { soal: "Hewan yang menjadi lambang negara Indonesia adalah...", pilihan: ["Harimau", "Gajah", "Elang", "Komodo"], jawaban: 3 },
+        { soal: "Danau terbesar di Indonesia adalah...", pilihan: ["Danau Toba", "Danau Singkarak", "Danau Poso", "Danau Batur"], jawaban: 1 },
+        { soal: "Siapakah presiden pertama Republik Indonesia?", pilihan: ["Soeharto", "BJ Habibie", "Ir. Soekarno", "Megawati"], jawaban: 3 }
+    ];
+    inisialisasiGame("pengetahuan_umum", dataSoal);
+}
+</script>
+</body>
+</html>

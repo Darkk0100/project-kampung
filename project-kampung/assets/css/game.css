@@ -1,0 +1,273 @@
+:root {
+    --warna-utama: #8B5CF6;
+    --warna-gradient: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+    --warna-teks: #F3E8FF;
+    --warna-batas: rgba(139, 92, 246, 0.15);
+    --warna-benar: #16A34A;
+    --warna-salah: #DC2626;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #0F172A;
+    color: #E2E8F0;
+    line-height: 1.6;
+}
+
+/* Struktur Dasar */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: rgba(15, 23, 42, 0.8);
+    border-bottom: 1px solid var(--warna-batas);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.tombol-menu {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #94A3B8;
+    transition: color 0.2s;
+}
+.tombol-menu:hover { color: var(--warna-utama); }
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--warna-utama);
+}
+
+.header-right { display: flex; gap: 1rem; align-items: center; }
+.profil-btn, .btn-keluar {
+    color: #94A3B8;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+.profil-btn:hover, .btn-keluar:hover { color: var(--warna-utama); }
+
+/* Menu Samping */
+.lapisan-gelap {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 200;
+    display: none;
+}
+.lapisan-gelap.aktif { display: block; }
+
+.menu-samping {
+    position: fixed;
+    top: 0; left: -280px;
+    width: 280px; height: 100%;
+    background: #1E293B;
+    z-index: 300;
+    padding: 2rem;
+    transition: left 0.3s ease;
+    border-right: 1px solid var(--warna-batas);
+}
+.menu-samping.buka { left: 0; }
+
+.tutup-menu {
+    text-align: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #94A3B8;
+    margin-bottom: 2rem;
+}
+
+.nav-menu { display: flex; flex-direction: column; gap: 0.5rem; }
+.nav-btn {
+    color: #CBD5E1;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.nav-btn:hover { background: var(--warna-utama); color: white; }
+
+/* Konten Utama */
+.main-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.content-card {
+    background-color: #1E293B;
+    border: 1px solid var(--warna-batas);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.judul-utama {
+    text-align: center;
+    color: var(--warna-utama);
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+.deskripsi-utama {
+    text-align: center;
+    color: #94A3B8;
+    margin-bottom: 2rem;
+}
+
+/* Grid Pilihan Game */
+.grid-game {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.kartu-game {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--warna-batas);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #E2E8F0;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.kartu-game:hover {
+    transform: translateY(-5px);
+    border-color: var(--warna-utama);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.icon-game {
+    width: 70px;
+    height: 70px;
+    background: var(--warna-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.kartu-game h2 { font-size: 1.2rem; margin-bottom: 0.5rem; color: white; }
+.kartu-game p { font-size: 0.9rem; color: #94A3B8; margin-bottom: 1rem; }
+
+.btn-masuk {
+    color: var(--warna-utama);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/* Tampilan Dalam Game (Umum) */
+.tombol-kembali {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94A3B8;
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.tombol-kembali:hover { color: var(--warna-utama); transform: translateX(-5px); }
+
+.game-header { text-align: center; margin-bottom: 2rem; }
+.game-icon { font-size: 3rem; color: var(--warna-utama); margin-bottom: 0.5rem; }
+.judul-game { font-size: 1.8rem; color: white; margin-bottom: 0.5rem; }
+.deskripsi-game { color: #94A3B8; }
+
+.btn-mulai {
+    background: var(--warna-gradient);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto 2rem;
+}
+.btn-mulai:hover { transform: scale(1.08); box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4); }
+
+/* Papan Peringkat */
+.papan-peringkat {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--warna-batas);
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+.judul-papan {
+    font-size: 1.3rem;
+    color: var(--warna-utama);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.daftar-peringkat { list-style: none; }
+.peringkat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 0.6rem;
+    border-radius: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.peringkat-item.pertama { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(109, 40, 217, 0.15) 100%); border-color: var(--warna-utama); color: #C4B5FD; font-weight: bold; font-size: 1.05rem; }
+.peringkat-item.kedua { background: linear-gradient(135deg, rgba(209, 213, 219, 0.2) 0%, rgba(156, 163, 175, 0.15) 100%); border-color: #D1D5DB; color: #D1D5DB; font-weight: bold; font-size: 1.05rem; }
+.peringkat-item.ketiga { background: linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(124, 58, 237, 0.15) 100%); border-color: #A78BFA; color: #DDD6FE; font-weight: bold; font-size: 1.05rem; }
+.nomor-urutan { font-weight: bold; font-size: 1.1rem; min-width: 25px; }
+.nama-pemain { flex: 1; margin: 0 1rem; text-align: left; }
+.poin-pemain { font-weight: 600; color: #4ADE80; }
+
+/* Level & Soal */
+.area-level, .area-soal { display: none; }
+.daftar-level { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.kartu-level { 
+    background-color: rgba(255, 255, 255, 0.03); border: 2px solid var(--warna-batas);
+    border-radius: 0.8rem; padding: 1.2rem 0.5rem; text-align: center;
+    color: #E2E8F0; transition: all 0.3s ease; position: relative;
+}
+.kartu-level.terkunci { opacity: 0.4; filter: grayscale(80%); cursor: not-allowed; }
+.kartu-level.terkunci::after { content: '\f023'; font-family: 'Font Awesome 4.7.0'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; color: #94A3B8; }
+.kartu-level.bisa-dipilih:hover:not(.terkunci) { background-color: rgba(139, 92, 246, 0.1); transform: translateY(-5px); border-color: var(--warna-utama); }
+.nomor-level { font-size: 1.5rem; font-weight: bold; color: var(--warna-utama); }
+
+.kotak-soal { background-color: rgba(0, 0, 0, 0.2); border: 1px solid var(--warna-batas); border-radius: 1.2rem; padding: 2rem; text-align: center; }
+.teks-soal { font-size: 1.3rem; margin: 1.5rem 0; color: #F8FAFC; }
+.pilihan-jawaban { display: grid; gap: 0.8rem; margin: 1.5rem 0; }
+.pilihan { padding: 0.8rem; border-radius: 0.6rem; border: 1px solid rgba(255,255,255,0.1); background-color: rgba(255,255,255,0.05); color: #E2E8F0; cursor: pointer; transition: all 0.2s; }
+.pilihan:hover { border-color: var(--warna-utama); background-color: rgba(139, 92, 246, 0.1); }
+.pilihan.benar { background-color: var(--warna-benar); border-color: var(--warna-benar); color: white; }
+.pilihan.salah { background-color: var(--warna-salah); border-color: var(--warna-salah); color: white; }
+.pesan-hasil { margin-top: 1rem; font-weight: bold; font-size: 1.1rem; }

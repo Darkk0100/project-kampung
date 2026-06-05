@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agama - Kampoeng Aing</title>
+    <link rel="stylesheet" href="/assets/css/game.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/assets/js/game.js"></script>
+</head>
+<body onload="muatSoalAgama()">
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="/./beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="#" class="nav-btn"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="#" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="#" class="nav-btn"><i class="fa fa-phone"></i> Kontak</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="animasiLogo"></span></h1>
+        <div class="header-right">
+            <a href="/./profil.html" class="profil-btn"><i class="fa fa-user-circle"></i> <span>Profil Saya</span></a>
+            <a href="/./index.html" class="btn-keluar"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="content" style="max-width: 650px; margin: 0 auto;">
+            <div class="content-card">
+                <a href="/./game.html" class="tombol-kembali"><i class="fa fa-arrow-left"></i> Kembali ke Pilihan Game</a>
+
+                <div id="halamanAwal">
+                    <div class="game-header">
+                        <div class="game-icon"><i class="fa fa-book"></i></div>
+                        <h1 class="judul-game">Agama & Akhlak</h1>
+                        <p class="deskripsi-game">Pengetahuan iman, ibadah, dan perilaku mulia.</p>
+                    </div>
+                    <button class="btn-mulai" onclick="bukaLevel()"><i class="fa fa-play"></i> MULAI BERMAIN</button>
+                    <div class="papan-peringkat" id="papanPeringkat">
+                        <h2 class="judul-papan"><i class="fa fa-list-ol"></i> Papan Peringkat Agama</h2>
+                        <ul class="daftar-peringkat"></ul>
+                    </div>
+                </div>
+
+                <div class="area-level" id="areaLevel">
+                    <h2 class="judul-game" style="text-align:center; margin-bottom:1rem;">Pilih Level</h2>
+                    <div class="daftar-level">
+                        <div class="kartu-level" id="level1" onclick="bukaSoal(1)"><div class="nomor-level">

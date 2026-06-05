@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Kampoeng Aing</title>
+    <!-- Panggil berkas CSS terpisah -->
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="tentang.html" class="nav-btn"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="berita.html" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="kegiatan.html" class="nav-btn"><i class="fa fa-calendar"></i> Kegiatan</a>
+            <a href="galeri.html" class="nav-btn"><i class="fa fa-image"></i> Galeri</a>
+            <a href="kontak.html" class="nav-btn"><i class="fa fa-phone"></i> Kontak</a>
+            <a href="admin.html" class="nav-btn" id="linkAdmin" style="color:red; font-weight:bold; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; display:none;">
+                <i class="fa fa-shield"></i> Kelola Akun (Admin)
+            </a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="namaAplikasi"></span></h1>
+        <div class="header-right">
+            <a href="beranda-warga.html" class="profil-btn"><i class="fa fa-home"></i> <span>Beranda</span></a>
+            <a href="login.html" class="btn-keluar" onclick="keluarAkun()"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="kartu-profil">
+            
+            <!-- BAGIAN FOTO PROFIL -->
+            <div class="wadah-foto">
+                <div class="foto-profil" id="tampilFoto">
+                    <i class="fa fa-user-circle" id="ikonProfil"></i>
+                    <img id="gambarProfil" src="" style="display:none; width:100%; height:100%;">
+                </div>
+                <button class="tombol-ganti-foto" onclick="bukaPilihanFoto()" title="Ganti Foto Profil">
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </div>
+
+            <!-- PILIHAN: GANTI FOTO / IKON -->
+            <div class="pilihan-foto" id="panelPilihan">
+                <p class="judul-pilihan">Pilih Ikon Bawaan:</p>
+                <div class="grid-ikon">
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-user-circle')"><i class="fa fa-user-circle"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-user')"><i class="fa fa-user"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-user-md')"><i class="fa fa-user-md"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-user-secret')"><i class="fa fa-user-secret"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-user-plus')"><i class="fa fa-user-plus"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-child')"><i class="fa fa-child"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-male')"><i class="fa fa-male"></i></div>
+                    <div class="ikon-pilihan" onclick="pilihIkon('fa-female')"><i class="fa fa-female"></i></div>
+                </div>
+
+                <p class="judul-pilihan">Atau Unggah Foto Sendiri:</p>
+                <input type="file" id="fileFoto" accept="image/*" class="input-file" onchange="unggahFoto(this)">
+                <button class="btn-unggah" onclick="document.getElementById('fileFoto').click()">📁 Pilih File</button>
+                <button class="btn-reset" onclick="kembaliKeDefault()">🔄 Reset Default</button>
+            </div>
+
+            <!-- DATA PENGGUNA -->
+            <div class="nama-user" id="namaUser">Nama Pengguna</div>
+            <div class="peran-user" id="peranUser">PENGGUNA</div>
+            
+            <hr class="garis">
+            <p class="keterangan">Ini adalah halaman profil akun Anda.<br>Data diambil saat Anda melakukan login.</p>
+        </div>
+    </main>
+
+    <script>
+        function bukaMenu() { document.getElementById("menuSamping").classList.add("buka"); document.getElementById("lapisanGelap").classList.add("aktif"); }
+        function tutupMenu() { document.getElementById("menuSamping").classList.remove("buka"); document.getElementById("lapisanGelap").classList.remove("aktif"); }
+        
+        window.onload = function() {
+            // Cek apakah sudah login
+            if(!localStorage.getItem('sudahLogin')) { window.location.href = "login.html"; return; }
+            
+            // Tampilkan menu Admin jika yang masuk Admin
+            if(localStorage.getItem('peranPengguna') === 'admin') document.getElementById('linkAdmin').style.display = 'flex';
+            
+            // Judul Aplikasi
+            document.getElementById('namaAplikasi').innerText = localStorage.getItem('namaAplikasi') || "KAMPOENG AING";
+
+            // Tampilkan Data Pengguna
+            document.getElementById('namaUser').innerText = localStorage.getItem('namaPengguna') || "Tidak Diketahui";
+            const peran = localStorage.getItem('peranPengguna');
+            document.getElementById('peranUser').innerText = peran ? peran.toUpperCase() : "PENGGUNA";
+
+            // ✅ MUAT FOTO PROFIL YANG SUDAH DISIMPAN
+            muatFotoProfil();
+        };
+
+        // --- FUNGSI FOTO PROFIL ---
+        function bukaPilihanFoto() {
+            const panel = document.getElementById('panelPilihan');
+            panel.classList.toggle('aktif');
+        }
+
+        function pilihIkon(namaIkon) {
+            // Sembunyikan gambar, tampilkan ikon
+            document.getElementById('gambarProfil').style.display = 'none';
+            const ikon = document.getElementById('ikonProfil');
+            ikon.style.display = 'block';
+            
+            // Ganti kelas ikon
+            ikon.className = 'fa ' + namaIkon;
+            
+            // Simpan ke memori
+            localStorage.setItem('fotoProfilJenis', 'ikon');
+            localStorage.setItem('fotoProfilData', namaIkon);
+
+            // Tandai ikon yang dipilih
+            document.querySelectorAll('.ikon-pilihan').forEach(el => el.classList.remove('terpilih'));
+            event.target.closest('.ikon-pilihan').classList.add('terpilih');
+        }
+
+        function unggahFoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Tampilkan gambar, sembunyikan ikon
+                    document.getElementById('ikonProfil').style.display = 'none';
+                    const gambar = document.getElementById('gambarProfil');
+                    gambar.style.display = 'block';
+                    gambar.src = e.target.result;
+
+                    // Simpan ke memori
+                    localStorage.setItem('fotoProfilJenis', 'gambar');
+                    localStorage.setItem('fotoProfilData', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function kembaliKeDefault() {
+            // Kembali ke ikon bawaan
+            document.getElementById('ikonProfil').style.display = 'block';
+            document.getElementById('gambarProfil').style.display = 'none';
+            document.getElementById('ikonProfil').className = 'fa fa-user-circle';
+            
+            // Hapus data lama
+            localStorage.removeItem('fotoProfilJenis');
+            localStorage.removeItem('fotoProfilData');
+            
+            // Tutup panel
+            document.getElementById('panelPilihan').classList.remove('aktif');
+        }
+
+        function muatFotoProfil() {
+            const jenis = localStorage.getItem('fotoProfilJenis');
+            const data = localStorage.getItem('fotoProfilData');
+
+            if (!jenis || !data) return; // Pakai default jika belum ada
+
+            if (jenis === 'ikon') {
+                document.getElementById('ikonProfil').style.display = 'block';
+                document.getElementById('gambarProfil').style.display = 'none';
+                document.getElementById('ikonProfil').className = 'fa ' + data;
+            }
+
+            if (jenis === 'gambar') {
+                document.getElementById('ikonProfil').style.display = 'none';
+                document.getElementById('gambarProfil').style.display = 'block';
+                document.getElementById('gambarProfil').src = data;
+            }
+        }
+
+        // --- KELUAR AKUN ---
+        function keluarAkun() { 
+            localStorage.clear(); 
+            window.location.href = "login.html"; 
+        }
+    </script>
+
+</body>
+</html>

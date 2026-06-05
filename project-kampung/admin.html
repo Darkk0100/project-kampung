@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HALAMAN ADMIN - Pusat Pengelolaan Lengkap</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    <!-- 🔑 HALAMAN LOGIN ADMIN (SUDAH DIPERBAIKI CLASS-NYA) -->
+    <div class="login-overlay" id="layaranLogin">
+        <div class="login-box">
+            <h2><i class="fa fa-lock"></i> LOGIN ADMINISTRATOR</h2>
+            <p class="login-note">Hanya Admin Utama yang diizinkan masuk</p>
+            <input type="text" id="namaAdmin" placeholder="Nama Pengguna Admin" required>
+            <input type="password" id="sandiAdmin" placeholder="Kata Sandi Admin" required>
+            <button class="btn-login" onclick="cekLoginAdmin()">🔓 MASUK KE SISTEM</button>
+        </div>
+    </div>
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <!-- MENU SAMPING: Semua Fitur Ada di Sini -->
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="#akun" class="nav-btn aktif" onclick="gantiTab('akun')"><i class="fa fa-users"></i> Kelola Akun</a>
+            <a href="#profil" class="nav-btn" onclick="gantiTab('profil')"><i class="fa fa-map-marker"></i> Ubah Alamat & Profil</a>
+            <a href="#tentang" class="nav-btn" onclick="gantiTab('tentang')"><i class="fa fa-info-circle"></i> Ubah Halaman Tentang</a>
+            <a href="#kegiatan" class="nav-btn" onclick="gantiTab('kegiatan')"><i class="fa fa-calendar"></i> Kelola Kegiatan</a>
+            <a href="#media" class="nav-btn" onclick="gantiTab('media')"><i class="fa fa-image"></i> Kelola Foto & Video</a>
+            <a href="#pengaturan" class="nav-btn" onclick="gantiTab('pengaturan')"><i class="fa fa-cog"></i> Pengaturan</a>
+            <a href="#saran" class="nav-btn" onclick="gantiTab('saran')">📩 Kotak Masukan & Saran</a>
+            <a href="index.html" class="nav-btn" style="margin-top:2rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem;">🏠 Kembali ke Beranda</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo">HALAMAN <span>ADMIN</span></h1>
+        <div class="header-right">
+            <span style="color:#16A34A; font-weight:bold;">✅ Terhubung Sebagai Admin</span>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="wadah-admin">
+            <h2 id="judulUtama">KELOLA AKUN PENGGUNA</h2>
+            <p class="peringatan">⚠️ Halaman ini pusat kendali - Admin Utama <strong>🔒 ADMIN</strong> tidak bisa dihapus</p>
+
+
+            <!-- ============================================== -->
+            <!-- 1. KELOLA AKUN (AMAN TERKUNCI ADMIN UTAMA) -->
+            <!-- ============================================== -->
+            <div id="konten-akun" class="konten-tab">
+                <div class="form-tambah">
+                    <h3>Tambah Akun Baru</h3>
+                    <input type="text" id="namaBaru" placeholder="Nama Pengguna" required>
+                    <input type="password" id="sandiBaru" placeholder="Kata Sandi" required>
+                    <select id="peranBaru">
+                        <option value="pengguna">Pengguna Biasa</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                    <button class="btn-tambah" onclick="tambahAkun()">✅ DAFTARKAN AKUN</button>
+                </div>
+
+                <h3>Daftar Akun Terdaftar</h3>
+                <ul class="daftar-akun" id="daftarAkun"></ul>
+            </div>
+            <div id="konten-saran" class="konten-tab" style="display:none;">
+     <div class="wadah-admin">
+         <!-- Tempat pesan akan muncul di sini -->
+         <div id="daftarSaran"></div>
+
+            <!-- ============================================== -->
+            <!-- 2. UBAH ALAMAT & KONTAK -->
+            <!-- ============================================== -->
+            <div id="konten-profil" class="konten-tab" style="display:none;">
+                <div class="form-tambah">
+                    <h3><i class="fa fa-map-pin"></i> Alamat Lengkap Desa / Wilayah</h3>
+                    <textarea id="isiAlamat" rows="4" placeholder="Masukkan alamat lengkap: Nama Desa, Jalan, RT/RW, Kecamatan, Kabupaten, Kode Pos..." class="textarea-ubah"></textarea>
+                    <button class="btn-tambah" onclick="simpanAlamat()">💾 SIMPAN ALAMAT</button>
+                </div>
+
+                <div class="form-tambah">
+                    <h3><i class="fa fa-phone"></i> Kontak Resmi</h3>
+                    <input type="text" id="isiTelepon" placeholder="Nomor Telepon / HP">
+                    <input type="email" id="isiEmail" placeholder="Alamat Email">
+                    <input type="text" id="isiMaps" placeholder="Link Google Maps (Opsional)">
+                    <button class="btn-tambah" onclick="simpanKontak()">💾 SIMPAN KONTAK</button>
+                </div>
+            </div>
+
+
+            <!-- ============================================== -->
+            <!-- 3. UBAH HALAMAN TENTANG / SEJARAH -->
+            <!-- ============================================== -->
+            <div id="konten-tentang" class="konten-tab" style="display:none;">
+                <div class="form-tambah">
+                    <h3><i class="fa fa-pencil"></i> Judul Halaman</h3>
+                    <input type="text" id="judulTentang" placeholder="Contoh: Tentang Kami / Sejarah Desa">
+
+                    <h3 style="margin-top:1rem;">Isi Tulisan Lengkap</h3>
+                    <textarea id="isiTentang" rows="12" placeholder="Tulis cerita, sejarah, visi misi, atau informasi umum di sini..." class="textarea-ubah"></textarea>
+                    
+                    <button class="btn-tambah" onclick="simpanTentang()">💾 SIMPAN ISI HALAMAN</button>
+                </div>
+            </div>
+
+
+            <!-- ============================================== -->
+            <!-- 4. KELOLA KEGIATAN & AGENDA -->
+            <!-- ============================================== -->
+            <div id="konten-kegiatan" class="konten-tab" style="display:none;">
+                <div class="form-tambah">
+                    <h3><i class="fa fa-plus-circle"></i> Tambah Kegiatan Baru</h3>
+                    <input type="text" id="namaKegiatan" placeholder="Nama Kegiatan">
+                    <input type="date" id="tanggalKegiatan">
+                    <select id="jenisKegiatan">
+                        <option>Informasi Umum</option>
+                        <option>Kerja Bakti</option>
+                        <option>Rapat Warga</option>
+                        <option>Peringatan Hari Besar</option>
+                        <option>Lainnya</option>
+                    </select>
+                    <textarea id="deskripsiKegiatan" rows="3" placeholder="Jelaskan detail kegiatan, waktu, tempat..." class="textarea-ubah"></textarea>
+                    <button class="btn-tambah" onclick="tambahKegiatan()">✅ TAMBAH KE AGENDA</button>
+                </div>
+
+                <h3>Daftar Agenda Terjadwal</h3>
+                <ul class="daftar-akun" id="daftarKegiatan"></ul>
+            </div>
+
+
+            <!-- ============================================== -->
+            <!-- 5. UPLOAD & HAPUS FOTO / VIDEO (FITUR BARU) -->
+            <!-- ============================================== -->
+            <div id="konten-media" class="konten-tab" style="display:none;">
+                <div class="form-tambah">
+                    <h3><i class="fa fa-upload"></i> Unggah Foto atau Video Baru</h3>
+                    
+                    <!-- PILIH FILE -->
+                    <input type="file" id="fileInput" accept="image/*,video/*" style="padding:0.8rem 0; background:rgba(255,255,255,0.05); border-radius:8px; margin:1rem 0;">
+                    
+                    <!-- TAMPILAN PRATINJAUAN -->
+                    <div id="pratinjauMedia" style="margin:1rem 0; min-height:100px; display:flex; align-items:center; justify-content:center; border:1px dashed var(--warna-batas); border-radius:8px; padding:1rem; color:#9CA3AF;">
+                        <i class="fa fa-image" style="font-size:2rem; margin-right:0.5rem;"></i> <span>Pilih file untuk melihat pratinjau</span>
+                    </div>
+
+                    <input type="text" id="judulMedia" placeholder="Beri Judul / Nama File (Contoh: Foto Kerja Bakti)">
+                    <button class="btn-tambah" onclick="unggahMedia()">📤 SIMPAN KE GALERI</button>
+                </div>
+
+                <h3>Daftar Foto & Video Tersimpan</h3>
+                <div id="daftarMedia" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1rem; margin-top:1rem;"></div>
+            </div>
+
+
+            <!-- ============================================== -->
+            <!-- 6. PENGATURAN SISTEM -->
+            <!-- ============================================== -->
+            <div id="konten-pengaturan" class="konten-tab" style="display:none;">
+                
+                <!-- TAMBAHKAN BAGIAN INI DI DALAM <div class="konten-tab" id="konten-kelola"> -->
+
+                <div class="form-tambah" style="border-bottom: 1px solid #444; padding-bottom: 2rem; margin-bottom: 2rem;">
+                    <h2>🏠 Kelola Beranda Biasa (Halaman Awal)</h2>
+                    <p>Isi di sini akan tampil di halaman depan untuk umum/belum login.</p>
+                    <textarea id="editBerandaBiasa" rows="6" placeholder="Tulis isi halaman beranda biasa..."></textarea>
+                    <button class="btn-tambah" onclick="simpanIsi('kontenBerandaBiasa', editBerandaBiasa.value)">💾 Simpan Beranda Biasa</button>
+                </div>
+
+                <div class="form-tambah">
+                    <h2>👥 Kelola Beranda Warga (Halaman Setelah Login)</h2>
+                    <p>Isi di sini akan tampil di halaman khusus warga:</p>
+
+                    <h3>📅 Jadwal Kegiatan</h3>
+                    <textarea id="editJadwal" rows="4" placeholder="Isi jadwal..."></textarea>
+                    <button class="btn-tambah" onclick="simpanIsi('kontenJadwal', editJadwal.value)">💾 Simpan Jadwal</button>
+
+                    <h3>⚠️ Info Penting</h3>
+                    <textarea id="editInfo" rows="4" placeholder="Isi info penting..."></textarea>
+                    <button class="btn-tambah" onclick="simpanIsi('kontenInfo', editInfo.value)">💾 Simpan Info</button>
+
+                    <h3>📰 Berita Desa</h3>
+                    <textarea id="editBerita" rows="4" placeholder="Isi berita..."></textarea>
+                    <button class="btn-tambah" onclick="simpanIsi('kontenBerita', editBerita.value)">💾 Simpan Berita</button>
+
+                    <h3>📚 Rak Buku / Dokumen</h3>
+                    <textarea id="editBuku" rows="4" placeholder="Isi daftar buku/link..."></textarea>
+                    <button class="btn-tambah" onclick="simpanIsi('kontenBuku', editBuku.value)">💾 Simpan Buku</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="assets/js/admin.js"></script>
+
+</body>
+</html>

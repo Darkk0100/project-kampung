@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - Kampoeng Aing</title>
+    <link rel="stylesheet" href="assets/css/beranda.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        .kartu-kontak {
+            background: var(--warna-abu-gelap);
+            border: 1px solid var(--warna-batas);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem auto;
+            max-width: 600px;
+        }
+        .item-kontak {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .item-kontak i { color: var(--warna-utama); font-size: 1.3rem; width:25px; text-align:center; }
+        .peta-wadah { margin-top:1.5rem; border-radius:8px; overflow:hidden; height:200px; background:#222; display:flex; align-items:center; justify-content:center; color:#999; }
+    </style>
+</head>
+<body>
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="beranda.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="tentang.html" class="nav-btn"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="berita.html" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="kegiatan.html" class="nav-btn"><i class="fa fa-calendar"></i> Kegiatan</a>
+            <a href="galeri.html" class="nav-btn"><i class="fa fa-image"></i> Galeri</a>
+            <a href="kontak.html" class="nav-btn active"><i class="fa fa-phone"></i> Kontak</a>
+            <a href="admin.html" class="nav-btn" id="linkAdmin" style="color:red; font-weight:bold; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; display:none;">
+                <i class="fa fa-shield"></i> Kelola Akun (Admin)
+            </a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="namaAplikasi"></span></h1>
+        <div class="header-right">
+            <a href="profil.html" class="profil-btn"><i class="fa fa-user-circle"></i> <span>Profil</span></a>
+            <a href="login.html" class="btn-keluar" onclick="keluarAkun()"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="kartu-kontak">
+            <h2 style="color:var(--warna-utama); text-align:center; margin-bottom:1.5rem;"><i class="fa fa-map-marker"></i> Informasi Kontak</h2>
+            
+            <div class="item-kontak">
+                <i class="fa fa-map-pin"></i>
+                <div><strong>Alamat:</strong><br><span id="alamatTampil">Belum diatur</span></div>
+            </div>
+            <div class="item-kontak">
+                <i class="fa fa-phone"></i>
+                <div><strong>Telepon:</strong><br><span id="telpTampil">Belum diatur</span></div>
+            </div>
+            <div class="item-kontak">
+                <i class="fa fa-envelope"></i>
+                <div><strong>Email:</strong><br><span id="emailTampil">Belum diatur</span></div>
+            </div>
+
+            <div class="peta-wadah" id="wadahPeta">
+                <i class="fa fa-map-o" style="font-size:2rem; margin-right:0.5rem;"></i> Lokasi Peta Belum Disetting
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function bukaMenu() { document.getElementById("menuSamping").classList.add("buka"); document.getElementById("lapisanGelap").classList.add("aktif"); }
+        function tutupMenu() { document.getElementById("menuSamping").classList.remove("buka"); document.getElementById("lapisanGelap").classList.remove("aktif"); }
+        
+        window.onload = function() {
+            if(!localStorage.getItem('sudahLogin')) { window.location.href = "login.html"; return; }
+            if(localStorage.getItem('peranPengguna') === 'admin') document.getElementById('linkAdmin').style.display = 'flex';
+            document.getElementById('namaAplikasi').innerText = localStorage.getItem('namaAplikasi') || "KAMPOENG AING";
+
+            // ✅ AMBIL DATA DARI ADMIN
+            document.getElementById('alamatTampil').innerText = localStorage.getItem('alamatDesa') || "Belum ada alamat";
+            document.getElementById('telpTampil').innerText = localStorage.getItem('telpDesa') || "-";
+            document.getElementById('emailTampil').innerText = localStorage.getItem('emailDesa') || "-";
+            
+            // Tampilkan Maps jika ada
+            if(localStorage.getItem('mapsDesa')) {
+                document.getElementById('wadahPeta').innerHTML = `<iframe src="${localStorage.getItem('mapsDesa')}" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>`;
+            }
+        };
+        function keluarAkun() { localStorage.clear(); window.location.href = "login.html"; }
+    </script>
+
+</body>
+</html>

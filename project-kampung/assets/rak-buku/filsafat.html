@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>belajar filsafat - Kampoeng Aing</title>
+    <link rel="stylesheet" href="buku.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="../../game.js"></script>
+</head>
+<body>
+
+    <!-- ✅ LAPISAN GELAP -->
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <!-- ✅ MENU SAMPING -->
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu-btn" onclick="tutupMenu()">
+            <i class="fa fa-times"></i>
+        </div>
+        
+        <div class="judul-menu">
+            <h3>KAMPOENG AING</h3>
+            <p>yu belajar filsafat</p>
+        </div>
+
+        <div class="daftar-menu">
+            <a href="/./beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="/./rak-buku.html" class="nav-btn"><i class="fa fa-book"></i> Rak Buku</a>
+            
+            <!-- ✅ DAFTAR MENU SESUAI FILE .TXT KAMU -->
+            <a href="filsafat.html" class="nav-btn aktif"><i class="fa fa-list"></i> Daftar Isi Filsafat</a>
+            <a href="?nama=sejarah-santa-cruz" class="nav-btn"><i class="fa fa-file-text"></i> 1. Peristiwa Santa Cruz</a>
+            <a href="?nama=pembantaian-masal" class="nav-btn"><i class="fa fa-file-text"></i> 2. Pembantaian Massal 1965-1966</a>
+            <!-- Tambah menu lain di sini sesuai nama file .txt kamu -->
+
+            <div class="garis-pemisah"></div>
+            
+        </div>
+    </div>
+
+    <!-- ✅ HEADER -->
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()">
+            <i class="fa fa-bars"></i>
+        </div>
+        <a href="/./rak-buku.html" class="tombol-kembali"><i class="fa fa-arrow-left"></i> Kembali ke Rak Buku</a>
+        <div class="logo" id="judulHalaman">SEJARAH KELAM</div>
+    </header>
+
+    <!-- ✅ KONTEN MATERI -->
+    <div class="container-buku">
+        <div class="judul-materi">
+            <h1><i class="fa fa-exclamation-triangle"></i> <span id="namaMateri">SEJARAH YANG DITUTUPI</span></h1>
+            <p id="deskripsiMateri">mengenal filsafat</p>
+        </div>
+
+        <div class="kotak-isi" id="isiMateri">
+            <p style="text-align:center; color:#F59E0B;">Memuat isi materi...</p>
+        </div>
+    </div>
+
+<script>
+    // ✅ FUNGSI MENU SAMPING
+    function bukaMenu() {
+        document.getElementById("menuSamping").classList.add("buka");
+        document.getElementById("lapisanGelap").classList.add("aktif");
+        document.body.style.overflow = 'hidden';
+    }
+    function tutupMenu() {
+        document.getElementById("menuSamping").classList.remove("buka");
+        document.getElementById("lapisanGelap").classList.remove("aktif");
+        document.body.style.overflow = 'auto';
+    }
+
+    // ✅ SISTEM SATU HTML BACA BANYAK TXT (SESUAI FOLDER KAMU)
+    window.onload = function() {
+        // Ambil nama file dari alamat URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let namaFile = urlParams.get('nama');
+
+        // Jika tidak ada nama file, tampilkan daftar isi
+        if (!namaFile) {
+            namaFile = 'daftar-isi-filsafat'; // <-- Nama file daftar isi kamu
+            document.getElementById('namaMateri').innerText = 'DAFTAR ISI FILSAFAT';
+        } else {
+            // Ubah tampilan judul halaman
+            let judulBersih = namaFile.replace(/-/g, ' ').toUpperCase();
+            document.getElementById('namaMateri').innerText = judulBersih;
+        }
+
+        // ✅ PANGGIL FILE .TXT DARI DALAM FOLDER "sejarah/"
+        fetch(`filsafat/${namaFile}.txt`)
+            .then(res => res.text())
+            .then(teks => {
+                // Format teks jadi rapi (paragraf & baris baru)
+                let teksRapi = teks
+                    .split('\n\n')
+                    .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                    .join('');
+                
+                document.getElementById('isiMateri').innerHTML = teksRapi;
+            })
+            .catch(() => {
+                document.getElementById('isiMateri').innerHTML = `<p style="color:#EF4444; text-align:center;">⚠️ File <b>filsafat/${namaFile}.txt</b> tidak ditemukan!</p>`;
+            });
+    }
+</script>
+
+</body>
+</html>

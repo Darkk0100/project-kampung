@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Kampoeng Aing</title>
+    <link rel="stylesheet" href="assets/css/beranda.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        .konten-tentang {
+            background: var(--warna-abu-gelap);
+            border: 1px solid var(--warna-batas);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem auto;
+            max-width: 800px;
+            line-height: 1.8;
+        }
+        .judul-halaman {
+            color: var(--warna-utama);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="beranda.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="tentang.html" class="nav-btn active"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="berita.html" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="kegiatan.html" class="nav-btn"><i class="fa fa-calendar"></i> Kegiatan</a>
+            <a href="galeri.html" class="nav-btn"><i class="fa fa-image"></i> Galeri</a>
+            <a href="kontak.html" class="nav-btn"><i class="fa fa-phone"></i> Kontak</a>
+            <a href="admin.html" class="nav-btn" id="linkAdmin" style="color:red; font-weight:bold; margin-top:1rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; display:none;">
+                <i class="fa fa-shield"></i> Kelola Akun (Admin)
+            </a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="namaAplikasi"></span></h1>
+        <div class="header-right">
+            <a href="profil.html" class="profil-btn"><i class="fa fa-user-circle"></i> <span>Profil</span></a>
+            <a href="login.html" class="btn-keluar" onclick="keluarAkun()"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="konten-tentang">
+            <h2 class="judul-halaman" id="judulHalaman"></h2>
+            <div id="isiHalaman" style="color:var(--warna-teks); white-space: pre-line;">
+                <!-- Isi akan dimuat otomatis dari Admin -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function bukaMenu() { document.getElementById("menuSamping").classList.add("buka"); document.getElementById("lapisanGelap").classList.add("aktif"); }
+        function tutupMenu() { document.getElementById("menuSamping").classList.remove("buka"); document.getElementById("lapisanGelap").classList.remove("aktif"); }
+        
+        window.onload = function() {
+            // Cek Login
+            if(!localStorage.getItem('sudahLogin')) { window.location.href = "login.html"; return; }
+            // Tampilkan menu Admin jika admin
+            if(localStorage.getItem('peranPengguna') === 'admin') document.getElementById('linkAdmin').style.display = 'flex';
+            // Muat Nama Aplikasi
+            document.getElementById('namaAplikasi').innerText = localStorage.getItem('namaAplikasi') || "KAMPOENG AING";
+            
+            // ✅ MUAT ISI YANG SUDAH DIEDIT DI ADMIN
+            document.getElementById('judulHalaman').innerText = localStorage.getItem('judulTentang') || "Tentang Kami";
+            document.getElementById('isiHalaman').innerText = localStorage.getItem('isiTentang') || "Belum ada informasi yang ditambahkan oleh Admin.";
+        };
+
+        function keluarAkun() { localStorage.clear(); window.location.href = "login.html"; }
+    </script>
+
+</body>
+</html>

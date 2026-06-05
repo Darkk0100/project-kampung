@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilihan Game - Kampoeng Aing</title>
+    <link rel="stylesheet" href="assets/css/game.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="assets/js/game.js"></script>
+</head>
+<body onload="cekLogin(); animasiLogo()">
+
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu" onclick="tutupMenu()"><i class="fa fa-times"></i></div>
+        <div class="nav-menu">
+            <a href="beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <a href="#" class="nav-btn"><i class="fa fa-info-circle"></i> Tentang</a>
+            <a href="#" class="nav-btn"><i class="fa fa-newspaper-o"></i> Berita</a>
+            <a href="#" class="nav-btn"><i class="fa fa-phone"></i> Kontak</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()"><i class="fa fa-bars"></i></div>
+        <h1 class="logo"><span id="animasiLogo"></span></h1>
+        <div class="header-right">
+            <a href="profil.html" class="profil-btn"><i class="fa fa-user-circle"></i> <span>Profil Saya</span></a>
+            <a href="index.html" class="btn-keluar"><i class="fa fa-sign-out"></i> Keluar</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="content">
+            <div class="content-card">
+                <h1 class="judul-utama"><i class="fa fa-gamepad"></i> Pilih Kategori Game</h1>
+                <p class="deskripsi-utama">Uji kemampuanmu di berbagai bidang pengetahuan. Kumpulkan poin dan jadilah yang terbaik!</p>
+
+                <div class="grid-game">
+                    <a href="assets/game/matematika.html" class="kartu-game">
+                        <div class="icon-game"><i class="fa fa-calculator"></i></div>
+                        <h2>Matematika</h2>
+                        <p>Berhitung, logika angka, dan rumus</p>
+                        <span class="btn-masuk">Mainkan <i class="fa fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="assets/game/pengetahuan-umum.html" class="kartu-game">
+                        <div class="icon-game"><i class="fa fa-globe"></i></div>
+                        <h2>Pengetahuan Umum</h2>
+                        <p>Sejarah, geografi, dan wawasan luas</p>
+                        <span class="btn-masuk">Mainkan <i class="fa fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="assets/game/logika.html" class="kartu-game">
+                        <div class="icon-game"><i class="fa fa-puzzle-piece"></i></div>
+                        <h2>Logika</h2>
+                        <p>Teka-teki, pola, dan nalar</p>
+                        <span class="btn-masuk">Mainkan <i class="fa fa-arrow-right"></i></span>
+                    </a>
+
+                    <a href="assets/game/agama.html" class="kartu-game">
+                        <div class="icon-game"><i class="fa fa-book"></i></div>
+                        <h2>Agama</h2>
+                        <p>Iman, ibadah, dan akhlak</p>
+                        <span class="btn-masuk">Mainkan <i class="fa fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+/* ==============================================
+   DASAR & VARIABEL WARNA
+   ============================================== */
+:root {
+    --warna-utama: #16A34A;
+    --warna-merah: #DC2626;
+    --warna-kuning: #F59E0B;
+    --warna-abu-gelap: #1F2937;
+    --warna-abu-terang: #374151;
+    --warna-teks: #F3F4F6;
+    --warna-batas: #4B5563;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #111827;
+    color: var(--warna-teks);
+    line-height: 1.6;
+}
+
+/* ==============================================
+   ✅ TAMPILAN LOGIN ADMIN (SUDAH COCOK CLASS-NYA)
+   ============================================== */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999; /* Paling atas, menutupi segalanya */
+}
+
+.login-box {
+    background-color: var(--warna-abu-gelap);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid var(--warna-batas);
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.login-box h2 {
+    color: var(--warna-kuning);
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.login-note {
+    color: #F87171;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background-color: var(--warna-abu-terang);
+    border: 1px solid var(--warna-batas);
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.login-box input:focus {
+    outline: none;
+    border-color: var(--warna-utama);
+    background-color: #273549;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: var(--warna-utama);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #15803D;
+}
+
+/* ==============================================
+   MENU SAMPING
+   ============================================== */
+.lapisan-gelap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 99;
+    display: none;
+}
+.lapisan-gelap.aktif { display: block; }
+
+.menu-samping {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--warna-abu-gelap);
+    border-right: 1px solid var(--warna-batas);
+    z-index: 100;
+    transition: 0.3s ease;
+    padding: 1rem;
+}
+.menu-samping.buka { left: 0; }
+
+.tutup-menu {
+    text-align: right;
+    font-size: 1.5rem;
+    color: #9CA3AF;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.nav-menu a {
+    display: block;
+    color: var(--warna-teks);
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.nav-menu a.aktif, .nav-menu a:hover {
+    background: var(--warna-utama);
+    color: white;
+}
+
+/* ==============================================
+   HEADER
+   ============================================== */
+.header {
+    background: var(--warna-abu-gelap);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--warna-batas);
+    position: sticky;
+    top: 0;
+    z-index: 98;
+}
+
+.tombol-menu {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--warna-teks);
+}
+
+.logo {
+    font-size: 1.3rem;
+    color: var(--warna-teks);
+}
+.logo span { color: var(--warna-kuning); }
+
+/* ==============================================
+   KONTEN UTAMA
+   ============================================== */
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.wadah-admin {
+    background: var(--warna-abu-gelap);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--warna-batas);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.wadah-admin h2 {
+    color: var(--warna-kuning);
+    margin-bottom: 0.5rem;
+}
+
+.peringatan {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid var(--warna-kuning);
+    padding: 0.8rem;
+    border-radius: 6px;
+    color: #FCD34D;
+    margin-bottom: 2rem;
+}
+
+/* ==============================================
+   FORM & TOMBOL
+   ============================================== */
+.form-tambah {
+    background: var(--warna-abu-terang);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--warna-batas);
+    margin-bottom: 2rem;
+}
+
+.form-tambah h3 {
+    margin-bottom: 1rem;
+    color: #E5E7EB;
+}
+
+.form-tambah input, .form-tambah select, .textarea-ubah {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    background: var(--warna-abu-gelap);
+    border: 1px solid var(--warna-batas);
+    border-radius: 6px;
+    color: var(--warna-teks);
+    font-size: 1rem;
+}
+
+.textarea-ubah { resize: vertical; min-height: 120px; }
+
+.btn-tambah {
+    background: var(--warna-utama);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-tambah:hover { background: #15803D; }
+
+.btn-hapus {
+    background: var(--warna-merah);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* ==============================================
+   DAFTAR AKUN & ITEM
+   ============================================== */
+.daftar-akun {
+    list-style: none;
+}
+
+.item-akun {
+    background: var(--warna-abu-terang);
+    border: 1px solid var(--warna-batas);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ==============================================
+   RESPONSIF
+   ============================================== */
+@media (max-width: 768px) {
+    .wadah-admin { padding: 1rem; }
+    .item-akun { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}

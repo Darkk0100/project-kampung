@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rak Buku - Kampoeng Aing</title>
+    <!-- ✅ CSS DIPISAH KE FILE SENDIRI -->
+    <link rel="stylesheet" href="assets/css/rak-buku.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="game.js"></script>
+</head>
+<body>
+
+    <!-- ✅ LAPISAN GELAP -->
+    <div class="lapisan-gelap" id="lapisanGelap" onclick="tutupMenu()"></div>
+
+    <!-- ✅ MENU SAMPING -->
+    <div class="menu-samping" id="menuSamping">
+        <div class="tutup-menu-btn" onclick="tutupMenu()">
+            <i class="fa fa-times"></i>
+        </div>
+        
+        <div class="judul-menu">
+            <h3>KAMPOENG AING</h3>
+            <p>study room</p>
+        </div>
+
+        <div class="daftar-menu">
+            <a href="beranda-warga.html" class="nav-btn"><i class="fa fa-home"></i> Beranda</a>
+            <div class="garis-pemisah"></div>
+            
+            <a href="login.html" class="nav-btn masuk-akun"><i class="fa fa-sign-in"></i> Masuk Akun Pengurus</a>
+        </div>
+    </div>
+
+    <!-- ✅ HEADER -->
+    <header class="header">
+        <div class="tombol-menu" onclick="bukaMenu()">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="logo">BERHENTI BELAJAR = MATI</div>
+        <div></div>
+    </header>
+
+    <!-- ✅ KONTEN UTAMA: DAFTAR MATERI -->
+    <div class="container">
+        <div class="judul-halaman">
+            <h1><i class="fa fa-book"></i> RAK BUKU & MATERI</h1>
+            <p>pilihan materi</p>
+        </div>
+
+        <div class="daftar-materi">
+            <!-- ✅ FILSAFAT -->
+            <a href="assets/rak-buku/filsafat.html" class="kartu-materi">
+                <div class="ikon-materi"><i class="fa fa-lightbulb-o"></i></div>
+                <div class="nama-materi">Filsafat</div>
+                <div class="deskripsi-materi">Materi tentang pemikiran, logika, dan pandangan hidup</div>
+            </a>
+
+            <!-- ✅ MATEMATIKA -->
+            <a href="assets/rak-buku/matematika.html" class="kartu-materi">
+                <div class="ikon-materi"><i class="fa fa-calculator"></i></div>
+                <div class="nama-materi">Matematika</div>
+                <div class="deskripsi-materi">Angka, rumus, logika hitungan, dan pemecahan masalah</div>
+            </a>
+
+            <!-- ✅ SEJARAH -->
+            <a href="assets/rak-buku/sejarah.html" class="kartu-materi">
+                <div class="ikon-materi"><i class="fa fa-history"></i></div>
+                <div class="nama-materi">Sejarah</div>
+                <div class="deskripsi-materi">Kisah masa lalu, peristiwa penting, dan warisan budaya</div>
+            </a>
+
+            <!-- ✅ MITOLOGI -->
+            <a href="assets/rak-buku/mitologi.html" class="kartu-materi">
+                <div class="ikon-materi"><i class="fa fa-university"></i></div>
+                <div class="nama-materi">Mitologi</div>
+                <div class="deskripsi-materi">Cerita rakyat, legenda, dewa-dewi, dan kisah kuno</div>
+            </a>
+        </div>
+    </div>
+
+<script>
+    // ✅ FUNGSI MENU SAMPING
+    function bukaMenu() {
+        document.getElementById("menuSamping").classList.add("buka");
+        document.getElementById("lapisanGelap").classList.add("aktif");
+        document.body.style.overflow = 'hidden';
+    }
+    function tutupMenu() {
+        document.getElementById("menuSamping").classList.remove("buka");
+        document.getElementById("lapisanGelap").classList.remove("aktif");
+        document.body.style.overflow = 'auto';
+    }
+</script>
+
+</body>
+</html>

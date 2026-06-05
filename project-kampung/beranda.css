@@ -1,0 +1,444 @@
+/* === DASAR & VARIABEL WARNA === */
+:root {
+    --warna-utama: #FBBF24;
+    --warna-hitam: #111827;
+    --warna-abu-gelap: #1F2937;
+    --warna-abu-terang: #374151;
+    --warna-teks: #F3F4F6;
+    --warna-batas: rgba(251, 191, 36, 0.15);
+    --warna-merah: #DC2626;
+    --bayangan: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--warna-hitam) 0%, #1a1a2e 100%);
+    color: var(--warna-teks);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* === LAPISAN GELAP (UNTUK MENU SAMPING) === */
+.lapisan-gelap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 98;
+    display: none;
+    backdrop-filter: blur(4px);
+}
+.lapisan-gelap.aktif {
+    display: block;
+}
+
+/* === MENU SAMPING === */
+.menu-samping {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--warna-abu-gelap);
+    z-index: 99;
+    transition: all 0.3s ease;
+    border-right: 2px solid var(--warna-batas);
+    box-shadow: var(--bayangan);
+    padding: 1rem 0;
+}
+.menu-samping.buka {
+    left: 0;
+}
+
+.tutup-menu {
+    text-align: right;
+    padding: 0 1.5rem 1rem;
+    font-size: 1.5rem;
+    color: #9CA3AF;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.tutup-menu:hover {
+    color: var(--warna-merah);
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    color: #D1D5DB;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    border: 1px solid transparent;
+}
+.nav-btn i {
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+.nav-btn:hover, .nav-btn.active {
+    background: rgba(251, 191, 36, 0.1);
+    color: var(--warna-utama);
+    border-color: var(--warna-batas);
+    transform: translateX(4px);
+}
+
+/* === HEADER === */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(31, 41, 55, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--warna-batas);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+}
+
+.tombol-menu {
+    font-size: 1.4rem;
+    color: var(--warna-utama);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.tombol-menu:hover {
+    transform: scale(1.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--warna-utama);
+    letter-spacing: 1px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profil-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: #D1D5DB;
+    transition: all 0.2s;
+}
+.profil-btn:hover {
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+.btn-keluar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(220, 38, 38, 0.15);
+    color: #FCA5A5;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+}
+.btn-keluar:hover {
+    background: rgba(220, 38, 38, 0.25);
+    color: #FEE2E2;
+    border-color: #DC2626;
+}
+
+/* === KONTEN UTAMA === */
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* === SIDEBAR MENU WARGA (JIKA ADA) === */
+.sidebar {
+    background: var(--warna-abu-gelap);
+    border: 1px solid var(--warna-batas);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+.sidebar-title {
+    font-size: 1.1rem;
+    color: var(--warna-utama);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* === KHUSUS HALAMAN GAME === */
+.judul-halaman {
+    text-align: center;
+    color: #FBBF24;
+    font-size: 1.8rem;
+    margin: 2rem 0 0.5rem;
+}
+.sub-judul {
+    text-align: center;
+    color: #94A3B8;
+    margin-bottom: 3rem;
+}
+
+.grid-kategori {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    padding: 0 1rem;
+}
+
+.kartu-kategori {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--warna-batas);
+    border-radius: 1rem;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: #E2E8F0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.kartu-kategori:hover {
+    transform: translateY(-8px);
+    border-color: var(--warna-utama);
+    background-color: rgba(251, 191, 36, 0.05);
+}
+.ikon-kategori {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--warna-utama);
+}
+.nama-kategori {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.bagian-peringkat {
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--warna-batas);
+    border-radius: 1.2rem;
+}
+.judul-peringkat {
+    text-align: center;
+    color: var(--warna-utama);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.daftar-peringkat {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.peringkat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    border-radius: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.peringkat-item.pertama {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(217, 119, 6, 0.15) 100%);
+    border-color: var(--warna-utama);
+    color: #FBBF24;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+.peringkat-item.kedua {
+    background: linear-gradient(135deg, rgba(209, 213, 219, 0.2) 0%, rgba(156, 163, 175, 0.15) 100%);
+    border-color: #D1D5DB;
+    color: #D1D5DB;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+.peringkat-item.ketiga {
+    background: linear-gradient(135deg, rgba(180, 83, 9, 0.2) 0%, rgba(120, 53, 15, 0.15) 100%);
+    border-color: #B45309;
+    color: #FCD34D;
+    font-weight: bold;
+    font-size: 1.05rem;
+}
+.nomor-urutan {
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-width: 30px;
+}
+.nama-pemain {
+    flex: 1;
+    margin: 0 1rem;
+    text-align: left;
+}
+.poin-pemain {
+    font-weight: 600;
+    color: #4ADE80;
+    font-size: 1.05rem;
+}
+
+.btn-mulai-utama {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 3rem;
+    background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
+    color: #78350F;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-mulai-utama:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+}
+
+/* === KHUSUS HALAMAN ADMIN (MENGIKUTI GAYA UTAMA) === */
+.wadah-admin {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--warna-abu-gelap);
+    border-radius: 12px;
+    border: 2px solid #DC2626;
+    box-shadow: var(--bayangan);
+}
+.peringatan {
+    background:#fef2f2; 
+    color:#dc2626; 
+    padding:1rem; 
+    border-radius:6px;
+    text-align:center; 
+    font-weight:bold; 
+    margin-bottom:1rem;
+}
+.form-tambah { 
+    display:grid; 
+    gap:1rem; 
+    margin-bottom:2rem; 
+    padding-bottom:1rem; 
+    border-bottom:1px solid var(--warna-abu-terang); 
+}
+input, button { 
+    padding:0.8rem; 
+    border-radius:6px; 
+    border:none; 
+    font-size:1rem; 
+    background: var(--warna-abu-terang);
+    color: var(--warna-teks);
+    border: 1px solid #4B5563;
+}
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--warna-utama);
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.1);
+}
+select {
+    padding: 0.8rem;
+    border-radius: 6px;
+    background: var(--warna-abu-terang);
+    color: var(--warna-teks);
+    border: 1px solid #4B5563;
+}
+.btn-tambah { 
+    background:#16A34A; 
+    color:white; 
+    font-weight:bold; 
+    cursor: pointer;
+    border: none;
+}
+.btn-tambah:hover {
+    background: #15803D;
+}
+.btn-hapus { 
+    background:#ef4444; 
+    color:white; 
+    padding:0.3rem 0.7rem; 
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+}
+.btn-hapus:hover {
+    background: #DC2626;
+}
+.daftar-akun { 
+    list-style:none; 
+    padding:0; 
+    margin: 0;
+}
+.item-akun { 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    padding:0.7rem; 
+    margin:0.5rem 0; 
+    background:var(--warna-abu-terang); 
+    border-radius:6px; 
+    color: var(--warna-teks);
+}
+
+/* === RESPONSIVE (Layar HP) === */
+@media (max-width: 768px) {
+    .header {
+        padding: 1rem;
+    }
+    .logo {
+        font-size: 1.2rem;
+    }
+    .header-right {
+        gap: 0.5rem;
+    }
+    .profil-btn span {
+        display: none;
+    }
+    .main-container {
+        padding: 0 0.8rem;
+    }
+    .grid-kategori {
+        grid-template-columns: 1fr 1fr;
+    }
+}
